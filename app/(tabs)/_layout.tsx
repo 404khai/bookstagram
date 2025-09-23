@@ -24,7 +24,7 @@ export default function TabLayout() {
         headerShown: true,
         headerStyle: {
           height: 100,
-          backgroundColor: '#fff',
+          backgroundColor: '#fafafa',
           shadowColor: 'transparent', // remove shadow on iOS
           elevation: 0, // remove shadow on Android
         },
@@ -43,14 +43,22 @@ export default function TabLayout() {
         ),
         // 👇 notification bell on the right
         headerRight: () => (
-          <TouchableOpacity onPress={() => console.log('Go to Notifications')}>
-            <Ionicons
-              name="notifications-outline"
-              size={24}
-              color="#FF6B6B"
-              style={{ marginRight: 15 }}
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
+            <TouchableOpacity onPress={() => console.log('Go to Notifications')}>
+              <Ionicons
+                name="notifications-outline"
+                size={24}
+                color="#FF6B6B"
+                style={{ marginRight: 15 }}
+              />
+            </TouchableOpacity>
+
+            <Image
+              source={require("../../assets/images/avatar.jpeg")}
+              style={{width: 36, height: 36, borderRadius: 18 }}
             />
-          </TouchableOpacity>
+          </View>
+          
         ),
     
         tabBarIcon: ({ color, size }) => (
