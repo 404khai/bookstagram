@@ -8,6 +8,8 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import { router } from "expo-router";
+import { BookBookmark  } from "phosphor-react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 const sampleBooks = [
@@ -54,7 +56,7 @@ export default function Library() {
         </View>
 
         <TouchableOpacity style={styles.iconButton}>
-          <Ionicons name="book-outline" size={20} color="#FF6B6B" />
+          <BookBookmark  size={20} color="#333" weight="light" />
         </TouchableOpacity>
       </View>
 
@@ -64,7 +66,10 @@ export default function Library() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingBottom: 100 }}
         renderItem={({ item }) => (
-          <View style={styles.bookCard}>
+          <TouchableOpacity 
+            style={styles.bookCard} 
+            onPress={() => router.push("/screens/bookDetailScreen")}  // 👈 same thing here
+          >
             <Image source={{ uri: item.cover }} style={styles.bookCover} />
             <View style={{ flex: 1 }}>
               <Text style={styles.bookTitle}>{item.title}</Text>
@@ -76,9 +81,10 @@ export default function Library() {
               <Text style={styles.progressText}>23 / 45</Text>          
             </View>
             <Ionicons name="chevron-forward" size={20} color="#aaa" />
-          </View>
+          </TouchableOpacity>
         )}
       />
+
     </View>
   );
 }
@@ -104,7 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     marginRight: 12,
-    shadowColor: "#000",
+    shadowColor: "rgb(138, 138, 138)",
     shadowOpacity: 0.05,
     shadowRadius: 4,
     elevation: 2,
@@ -117,9 +123,9 @@ const styles = StyleSheet.create({
   },
   iconButton: {
     backgroundColor: "#fff",
-    padding: 8,
+    padding: 9,
     borderRadius: 10,
-    shadowColor: "#000",
+    shadowColor: "rgb(138, 138, 138)",
     shadowOpacity: 0.05,
     shadowRadius: 4,
     elevation: 2,
