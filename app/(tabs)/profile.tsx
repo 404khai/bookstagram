@@ -30,20 +30,20 @@ const sampleBooks = [
   {
     id: "1",
     title: "The Handmaid’s Tale",
-    author: "Margaret Atwood",
+    author: "Sochi-K",
     rating: "★★★★☆",
     progress: 23,
     total: 45,
-    cover: "https://m.media-amazon.com/images/I/71XspM9uRLL.jpg",
+    cover: require("../../assets/images/handmaid.jpg"),
   },
   {
     id: "2",
-    title: "1984",
-    author: "George Orwell",
+    title: "Ultimate Dark Fantasy",
+    author: "Sochi-K",
     rating: "★★★★★",
     progress: 12,
     total: 50,
-    cover: "https://m.media-amazon.com/images/I/81wgcld4wxL.jpg",
+    cover: require("../../assets/images/crawdads.jpg"),
   },
 ];
 
@@ -77,7 +77,11 @@ export default function ProfileScreen() {
             }}
             style={styles.headerImage}
           />
-          <View style={styles.headerOverlay} />
+          <LinearGradient
+              colors={["transparent", "rgba(223, 223, 223, 0.79)", "#fff"]}
+              style={styles.headerOverlay}
+          />
+          {/* <View style={styles.blackOverlay} /> */}
           <TouchableOpacity style={styles.settingsBtn} onPress={() => router.push("/screens/settings")}>
             <Ionicons name="settings-sharp" size={26} color="#fff" />
           </TouchableOpacity>
@@ -190,25 +194,25 @@ export default function ProfileScreen() {
             <View>
               {sampleBooks.map((book) => (
                 <View key={book.id} style={styles.bookCard}>
-                  <Image source={{ uri: book.cover }} style={styles.bookCover} />
+                  <Image source={book.cover} style={styles.bookCover} />
                   <View style={styles.readingInfo}>
                     <Text style={styles.bookTitle}>{book.title}</Text>
                     <Text style={styles.bookAuthor}>{book.author}</Text>
                     <Text style={styles.rating}>{book.rating}</Text>
-                    <View style={styles.progressBar}>
+                    {/* <View style={styles.progressBar}>
                       <View
                         style={[
                           styles.progressFill,
                           { width: `${(book.progress / book.total) * 100}%` },
                         ]}
                       />
-                    </View>
+                    </View> */}
                     <Text style={styles.progressText}>
-                      {book.progress} / {book.total}
+                      {book.total} chapters
                     </Text>
-                    <TouchableOpacity style={styles.moreBtn}>
+                    {/* <TouchableOpacity style={styles.moreBtn}>
                       <Text style={styles.moreBtnText}>More</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                   </View>
                 </View>
               ))}
@@ -237,7 +241,7 @@ export default function ProfileScreen() {
 
       {/* Floating Add Post */}
       <TouchableOpacity style={styles.floatingBtn}>
-        <Feather name="feather" size={26} color="#fff" />
+        <Feather name="pen-tool" size={26} color="#FF6B6B" />
       </TouchableOpacity>
 
       {/* Modal Image Viewer */}
@@ -267,11 +271,29 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
-  headerImageContainer: { height: 130 },
-  headerImage: { width: "100%", height: "100%" },
+  headerImageContainer: {
+    position: "relative",
+    width: "100%",
+    height: 130,
+  },
+
+  headerImage: {
+    width: "100%",
+    height: "100%",
+  },
+
   headerOverlay: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 80, // adjust depending on how much blend you want
+  },
+
+  blackOverlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0,0,0,0.3)",
+    height: 90,
   },
   settingsBtn: {
     position: "absolute",
@@ -283,7 +305,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 20,
     alignItems: "center",
-    marginTop: -40,
+    marginTop: -60,
   },
   profilePicWrapper: { position: "relative", marginRight: 20 },
   gradientBorder: { borderRadius: 60, padding: 3 },
@@ -367,7 +389,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 25,
     right: 25,
-    backgroundColor: "#FF6B6B",
+    backgroundColor: "#000",
     borderRadius: 30,
     padding: 15,
     elevation: 5,
