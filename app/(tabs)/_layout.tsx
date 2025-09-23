@@ -73,6 +73,47 @@ export default function TabLayout() {
       name="library"
       options={{
         title: 'Library',
+        headerShown: true,
+        headerStyle: {
+          height: 100,
+          // backgroundColor: '#fff0fa',
+          backgroundColor: '#fafafa',
+          shadowColor: 'transparent', // remove shadow on iOS
+          elevation: 0, // remove shadow on Android
+        },
+        headerTintColor: '#fff',
+        // 👇 custom header title with image + text
+        headerTitle: () => (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            {/* <Image
+              source={require('@/assets/images/blogo2.png')} // replace with your logo
+              style={{ width: 100, height: 80, marginRight: 8 }}
+            /> */}
+            <Text style={{fontFamily: 'HennyPenny_400Regular', color: '#FF6B6B', fontSize: 30 }}>
+              Library
+            </Text>
+          </View>
+        ),
+        // 👇 notification bell on the right
+        headerRight: () => (
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
+            <TouchableOpacity onPress={() => console.log('Go to Notifications')}>
+              <Ionicons
+                name="notifications-outline"
+                size={24}
+                color="#FF6B6B"
+                style={{ marginRight: 15 }}
+              />
+            </TouchableOpacity>
+
+            <Image
+              source={require("../../assets/images/avatar.jpeg")}
+              style={{width: 36, height: 36, borderRadius: 18 }}
+            />
+          </View>
+          
+        ),
+    
         tabBarIcon: ({ color, size }) => (
           <Ionicons name="library" size={size} color={color} />
         ),
