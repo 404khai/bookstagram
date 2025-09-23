@@ -20,20 +20,23 @@ export default function TabLayout() {
     <Tabs.Screen
       name="index"
       options={{
-        title: 'Bookstagram',
+        title: 'Home',
         headerShown: true,
         headerStyle: {
-          backgroundColor: '#FF6B6B',
+          height: 100,
+          backgroundColor: '#fff',
+          shadowColor: 'transparent', // remove shadow on iOS
+          elevation: 0, // remove shadow on Android
         },
         headerTintColor: '#fff',
         // 👇 custom header title with image + text
         headerTitle: () => (
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Image
+            {/* <Image
               source={require('@/assets/images/blogo2.png')} // replace with your logo
               style={{ width: 100, height: 80, marginRight: 8 }}
-            />
-            <Text style={{fontFamily: 'HennyPenny_400Regular', color: '#fff', fontSize: 18, fontWeight: 'bold' }}>
+            /> */}
+            <Text style={{fontFamily: 'HennyPenny_400Regular', color: '#FF6B6B', fontSize: 30 }}>
               Bookstagram
             </Text>
           </View>
@@ -44,7 +47,7 @@ export default function TabLayout() {
             <Ionicons
               name="notifications-outline"
               size={24}
-              color="#fff"
+              color="#FF6B6B"
               style={{ marginRight: 15 }}
             />
           </TouchableOpacity>
