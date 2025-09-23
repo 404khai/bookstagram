@@ -54,7 +54,11 @@ export default function BookDetailScreen() {
 
           {[1, 2, 3, 4, 5].map((chapter) => (
             <TouchableOpacity key={chapter} style={styles.chapterCard}>
-              <Text style={styles.chapterTitle}>Chapter {chapter}</Text>
+                <View>
+                    <Text style={styles.chapterTitle}>Chapter {chapter}</Text>  
+                    <Text style={{ color: "#777", marginTop: 4 }}>Down at the Countryside</Text>
+                </View>
+              
               <Ionicons
                 name="chevron-forward-outline"
                 size={20}
@@ -116,11 +120,13 @@ const styles = StyleSheet.create({
     color: "#222",
   },
   chapterCard: {
+    height: 80,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#fff",
-    padding: 14,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     borderRadius: 12,
     marginBottom: 10,
     shadowColor: "#000",

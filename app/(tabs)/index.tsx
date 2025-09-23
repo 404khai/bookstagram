@@ -73,7 +73,7 @@ export default function HomeScreen() {
         {/* --- Greeting --- */}
         <View style={styles.header}>
           <Text style={styles.greeting}>
-            What will you read, Sochima
+            What will you read, Sochi-K
           </Text>
           <Text style={styles.subText}>We have some fantastic books for you.</Text>
         </View>
