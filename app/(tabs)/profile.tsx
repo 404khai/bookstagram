@@ -18,6 +18,7 @@ import {
 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useRouter } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
@@ -54,10 +55,11 @@ const samplePosts = [
   "https://picsum.photos/300/300?5",
 ];
 
-export default function ProfileScreen({ navigation }: ProfileScreenProps) {
+export default function ProfileScreen() {
   const [activeTab, setActiveTab] = useState("books");
   const [modalVisible, setModalVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const router = useRouter();
 
   const openImage = (index: number) => {
     setCurrentIndex(index);
@@ -76,19 +78,17 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
             style={styles.headerImage}
           />
           <View style={styles.headerOverlay} />
-          <TouchableOpacity
-            style={styles.settingsBtn}
-            onPress={() => navigation.navigate("settings")}
-          >
-            <Ionicons name="settings" size={26} color="#fff" />
+          <TouchableOpacity style={styles.settingsBtn} onPress={() => router.push("/screens/settings")}>
+            <Ionicons name="settings-sharp" size={26} color="#fff" />
           </TouchableOpacity>
+          
         </View>
 
         {/* Profile Row */}
         <View style={styles.profileRow}>
           <View style={styles.profilePicWrapper}>
             <LinearGradient
-              colors={["#FF6B6B", "#6BCBFF"]}
+              colors={["#FF6B6B", "#ffab6b"]}
               style={styles.gradientBorder}
             >
               <Image
@@ -97,12 +97,13 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
               />
             </LinearGradient>
             <TouchableOpacity style={styles.addStoryIcon}>
-              <Feather name="feather" size={18} color="#fff" />
+              <Feather name="plus" size={20} color="#ffab6b" />
             </TouchableOpacity>
           </View>
 
           <View style={styles.profileStats}>
-            <Text style={styles.username}>Sochi-K</Text>
+            <Text style={styles.displayName}>Sochi-K</Text>
+            <Text style={styles.username}>@sochi.fro</Text>
             <View style={styles.statsRow}>
               <View style={styles.statBox}>
                 <Text style={styles.statNumber}>12</Text>
@@ -288,9 +289,9 @@ const styles = StyleSheet.create({
   gradientBorder: { borderRadius: 60, padding: 3 },
   profilePic: { width: 90, height: 90, borderRadius: 45 },
   addStoryIcon: {
-    backgroundColor: "#FF6B6B",
+    backgroundColor: "#fff",
     borderRadius: 20,
-    padding: 5,
+    padding: 3,
     position: "absolute",
     right: 0,
     bottom: 0,
@@ -300,8 +301,9 @@ const styles = StyleSheet.create({
     flexDirection: "column", 
     marginTop: 15 
   },
-  username: { fontSize: 22, fontWeight: "700", color: "#111" },
-  statsRow: { flexDirection: "row", marginTop: 6 },
+  displayName: { fontSize: 22, fontWeight: "700", color: "#111" },
+  username: { fontSize: 13, fontWeight: "300", color: "#111" },
+  statsRow: { flexDirection: "row", marginTop: 6 , gap: 15},
   statBox: { marginRight: 15, alignItems: "center" },
   statNumber: { fontSize: 16, fontWeight: "600", color: "#111" },
   statLabel: { fontSize: 12, color: "#555" },
