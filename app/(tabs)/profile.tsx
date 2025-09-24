@@ -67,210 +67,216 @@ export default function ProfileScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        {/* Header Image */}
-        <View style={styles.headerImageContainer}>
-          <Image
-            source={{
-              uri: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
-            }}
-            style={styles.headerImage}
-          />
-          <LinearGradient
-              colors={["transparent", "rgba(223, 223, 223, 0.79)", "#fff"]}
-              style={styles.headerOverlay}
-          />
-          {/* <View style={styles.blackOverlay} /> */}
-          <TouchableOpacity style={styles.settingsBtn} onPress={() => router.push("/screens/settings")}>
-            <Ionicons name="settings-sharp" size={26} color="#fff" />
-          </TouchableOpacity>
-          
-        </View>
-
-        {/* Profile Row */}
-        <View style={styles.profileRow}>
-          <View style={styles.profilePicWrapper}>
+    <LinearGradient
+      colors={["#fafafa", "#ffeaea"]} 
+      style={styles.gradientBg}
+    >
+      <View style={styles.container}>
+        <ScrollView>
+          {/* Header Image */}
+          <View style={styles.headerImageContainer}>
+            <Image
+              source={{
+                uri: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
+              }}
+              style={styles.headerImage}
+            />
             <LinearGradient
-              colors={["#FF6B6B", "#ffab6b"]}
-              style={styles.gradientBorder}
+                colors={["transparent", "rgba(223, 223, 223, 0.79)", "#fff"]}
+                style={styles.headerOverlay}
+            />
+            {/* <View style={styles.blackOverlay} /> */}
+            <TouchableOpacity style={styles.settingsBtn} onPress={() => router.push("/screens/settings")}>
+              <Ionicons name="settings-sharp" size={26} color="#fff" />
+            </TouchableOpacity>
+            
+          </View>
+
+          {/* Profile Row */}
+          <View style={styles.profileRow}>
+            <View style={styles.profilePicWrapper}>
+              <LinearGradient
+                colors={["#FF6B6B", "#ffab6b"]}
+                style={styles.gradientBorder}
+              >
+                <Image
+                  source={require("../../assets/images/avatar.jpeg")}
+                  style={styles.profilePic}
+                />
+              </LinearGradient>
+              <TouchableOpacity style={styles.addStoryIcon}>
+                <Feather name="plus" size={20} color="#ffab6b" />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.profileStats}>
+              <Text style={styles.displayName}>Sochi-K</Text>
+              <Text style={styles.username}>@sochi.fro</Text>
+              <View style={styles.statsRow}>
+                <View style={styles.statBox}>
+                  <Text style={styles.statNumber}>12</Text>
+                  <Text style={styles.statLabel}>Posts</Text>
+                </View>
+                <View style={styles.statBox}>
+                  <Text style={styles.statNumber}>9</Text>
+                  <Text style={styles.statLabel}>Followers</Text>
+                </View>
+                <View style={styles.statBox}>
+                  <Text style={styles.statNumber}>53</Text>
+                  <Text style={styles.statLabel}>Following</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          {/* Bio */}
+          <Text style={styles.bio}>Author, Dreamer, Software Developer</Text>
+
+          {/* Tabs */}
+          <View style={styles.tabContainer}>
+            <TouchableOpacity
+              style={[styles.tab, activeTab === "books" && styles.activeTab]}
+              onPress={() => setActiveTab("books")}
             >
-              <Image
-                source={require("../../assets/images/avatar.jpeg")}
-                style={styles.profilePic}
+              <MaterialCommunityIcons
+                name="book-open-page-variant"
+                size={20}
+                color={activeTab === "books" ? "#FF6B6B" : "#555"}
               />
-            </LinearGradient>
-            <TouchableOpacity style={styles.addStoryIcon}>
-              <Feather name="plus" size={20} color="#ffab6b" />
+              <Text
+                style={[
+                  styles.tabText,
+                  activeTab === "books" && styles.activeTabText,
+                ]}
+              >
+                Books
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.tab, activeTab === "posts" && styles.activeTab]}
+              onPress={() => setActiveTab("posts")}
+            >
+              <Ionicons
+                name="grid-outline"
+                size={20}
+                color={activeTab === "posts" ? "#FF6B6B" : "#555"}
+              />
+              <Text
+                style={[
+                  styles.tabText,
+                  activeTab === "posts" && styles.activeTabText,
+                ]}
+              >
+                Posts
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.tab, activeTab === "likes" && styles.activeTab]}
+              onPress={() => setActiveTab("likes")}
+            >
+              <FontAwesome
+                name="heart"
+                size={20}
+                color={activeTab === "likes" ? "#FF6B6B" : "#555"}
+              />
+              <Text
+                style={[
+                  styles.tabText,
+                  activeTab === "likes" && styles.activeTabText,
+                ]}
+              >
+                Likes
+              </Text>
             </TouchableOpacity>
           </View>
 
-          <View style={styles.profileStats}>
-            <Text style={styles.displayName}>Sochi-K</Text>
-            <Text style={styles.username}>@sochi.fro</Text>
-            <View style={styles.statsRow}>
-              <View style={styles.statBox}>
-                <Text style={styles.statNumber}>12</Text>
-                <Text style={styles.statLabel}>Posts</Text>
-              </View>
-              <View style={styles.statBox}>
-                <Text style={styles.statNumber}>9</Text>
-                <Text style={styles.statLabel}>Followers</Text>
-              </View>
-              <View style={styles.statBox}>
-                <Text style={styles.statNumber}>53</Text>
-                <Text style={styles.statLabel}>Following</Text>
-              </View>
-            </View>
-          </View>
-        </View>
-
-        {/* Bio */}
-        <Text style={styles.bio}>Author, Dreamer, Software Developer</Text>
-
-        {/* Tabs */}
-        <View style={styles.tabContainer}>
-          <TouchableOpacity
-            style={[styles.tab, activeTab === "books" && styles.activeTab]}
-            onPress={() => setActiveTab("books")}
-          >
-            <MaterialCommunityIcons
-              name="book-open-page-variant"
-              size={20}
-              color={activeTab === "books" ? "#FF6B6B" : "#555"}
-            />
-            <Text
-              style={[
-                styles.tabText,
-                activeTab === "books" && styles.activeTabText,
-              ]}
-            >
-              Books
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.tab, activeTab === "posts" && styles.activeTab]}
-            onPress={() => setActiveTab("posts")}
-          >
-            <Ionicons
-              name="grid-outline"
-              size={20}
-              color={activeTab === "posts" ? "#FF6B6B" : "#555"}
-            />
-            <Text
-              style={[
-                styles.tabText,
-                activeTab === "posts" && styles.activeTabText,
-              ]}
-            >
-              Posts
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.tab, activeTab === "likes" && styles.activeTab]}
-            onPress={() => setActiveTab("likes")}
-          >
-            <FontAwesome
-              name="heart"
-              size={20}
-              color={activeTab === "likes" ? "#FF6B6B" : "#555"}
-            />
-            <Text
-              style={[
-                styles.tabText,
-                activeTab === "likes" && styles.activeTabText,
-              ]}
-            >
-              Likes
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Tab Content */}
-        <View style={styles.contentContainer}>
-          {activeTab === "books" && (
-            <View>
-              {sampleBooks.map((book) => (
-                <View key={book.id} style={styles.bookCard}>
-                  <Image source={book.cover} style={styles.bookCover} />
-                  <View style={styles.readingInfo}>
-                    <Text style={styles.bookTitle}>{book.title}</Text>
-                    <Text style={styles.bookAuthor}>{book.author}</Text>
-                    <Text style={styles.rating}>{book.rating}</Text>
-                    {/* <View style={styles.progressBar}>
-                      <View
-                        style={[
-                          styles.progressFill,
-                          { width: `${(book.progress / book.total) * 100}%` },
-                        ]}
-                      />
-                    </View> */}
-                    <Text style={styles.progressText}>
-                      {book.total} chapters
-                    </Text>
-                    {/* <TouchableOpacity style={styles.moreBtn}>
-                      <Text style={styles.moreBtnText}>More</Text>
-                    </TouchableOpacity> */}
+          {/* Tab Content */}
+          <View style={styles.contentContainer}>
+            {activeTab === "books" && (
+              <View>
+                {sampleBooks.map((book) => (
+                  <View key={book.id} style={styles.bookCard}>
+                    <Image source={book.cover} style={styles.bookCover} />
+                    <View style={styles.readingInfo}>
+                      <Text style={styles.bookTitle}>{book.title}</Text>
+                      <Text style={styles.bookAuthor}>{book.author}</Text>
+                      <Text style={styles.rating}>{book.rating}</Text>
+                      {/* <View style={styles.progressBar}>
+                        <View
+                          style={[
+                            styles.progressFill,
+                            { width: `${(book.progress / book.total) * 100}%` },
+                          ]}
+                        />
+                      </View> */}
+                      <Text style={styles.progressText}>
+                        {book.total} chapters
+                      </Text>
+                      {/* <TouchableOpacity style={styles.moreBtn}>
+                        <Text style={styles.moreBtnText}>More</Text>
+                      </TouchableOpacity> */}
+                    </View>
                   </View>
-                </View>
-              ))}
-            </View>
-          )}
-
-          {activeTab === "posts" && (
-            <View style={styles.gridContainer}>
-              {samplePosts.map((img, index) => (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => openImage(index)}
-                  style={styles.gridItem}
-                >
-                  <Image source={{ uri: img }} style={styles.gridImage} />
-                </TouchableOpacity>
-              ))}
-            </View>
-          )}
-
-          {activeTab === "likes" && (
-            <Text>❤️ Books and posts you liked will appear here.</Text>
-          )}
-        </View>
-      </ScrollView>
-
-      {/* Floating Add Post */}
-      <TouchableOpacity style={styles.floatingBtn}>
-        <Feather name="pen-tool" size={26} color="#FF6B6B" />
-      </TouchableOpacity>
-
-      {/* Modal Image Viewer */}
-      <Modal visible={modalVisible} transparent={true}>
-        <View style={styles.modalBackground}>
-          <FlatList
-            horizontal
-            pagingEnabled
-            data={samplePosts}
-            initialScrollIndex={currentIndex}
-            renderItem={({ item }) => (
-              <Image source={{ uri: item }} style={styles.modalImage} />
+                ))}
+              </View>
             )}
-            keyExtractor={(_, idx) => idx.toString()}
-          />
-          <TouchableOpacity
-            style={styles.closeBtn}
-            onPress={() => setModalVisible(false)}
-          >
-            <Ionicons name="close" size={30} color="#fff" />
-          </TouchableOpacity>
-        </View>
-      </Modal>
-    </View>
+
+            {activeTab === "posts" && (
+              <View style={styles.gridContainer}>
+                {samplePosts.map((img, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    onPress={() => openImage(index)}
+                    style={styles.gridItem}
+                  >
+                    <Image source={{ uri: img }} style={styles.gridImage} />
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
+
+            {activeTab === "likes" && (
+              <Text>❤️ Books and posts you liked will appear here.</Text>
+            )}
+          </View>
+        </ScrollView>
+
+        {/* Floating Add Post */}
+        <TouchableOpacity style={styles.floatingBtn}>
+          <Feather name="pen-tool" size={26} color="#FF6B6B" />
+        </TouchableOpacity>
+
+        {/* Modal Image Viewer */}
+        <Modal visible={modalVisible} transparent={true}>
+          <View style={styles.modalBackground}>
+            <FlatList
+              horizontal
+              pagingEnabled
+              data={samplePosts}
+              initialScrollIndex={currentIndex}
+              renderItem={({ item }) => (
+                <Image source={{ uri: item }} style={styles.modalImage} />
+              )}
+              keyExtractor={(_, idx) => idx.toString()}
+            />
+            <TouchableOpacity
+              style={styles.closeBtn}
+              onPress={() => setModalVisible(false)}
+            >
+              <Ionicons name="close" size={30} color="#fff" />
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
+  gradientBg: { flex: 1 },
+  container: { flex: 1, },
   headerImageContainer: {
     position: "relative",
     width: "100%",

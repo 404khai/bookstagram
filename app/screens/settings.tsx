@@ -82,7 +82,7 @@ export default function SettingsScreen() {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.header}>Settings</Text>
+      {/* <Text style={styles.header}>Settings</Text> */}
 
       {settingsOptions.map((item, index) => (
         <TouchableOpacity
@@ -120,10 +120,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginHorizontal: 15,
     marginVertical: 8,
-    paddingVertical: 8,
+    paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 12,
-    shadowColor: "#000",
+    shadowColor: "rgb(138, 138, 138)",
     shadowOpacity: 0.05,
     shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },

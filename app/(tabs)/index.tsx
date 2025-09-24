@@ -11,7 +11,10 @@ import {
   Dimensions,
   Modal,
 } from "react-native";
+import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { BookBookmark  } from "phosphor-react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const { width } = Dimensions.get("window");
 
@@ -40,167 +43,178 @@ export default function HomeScreen() {
   const [commentsVisible, setCommentsVisible] = useState(false);
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* --- Top Bar --- */}
-      <View style={styles.topBar}>
-        <View style={styles.searchContainer}>
-          <Ionicons name="search" size={18} color="#999" />
-          <TextInput
-            placeholder="Search"
-            placeholderTextColor="#999"
-            style={styles.searchInput}
-          />
+    // <LinearGradient
+    //   colors={["#fafafa", "#fff7e6"]} 
+    //   style={styles.gradientBg}
+    // >
+    <LinearGradient
+      colors={["#fafafa", "#ffeaea"]} 
+      style={styles.gradientBg}
+    >
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        {/* --- Top Bar --- */}
+        {/* <View style={styles.topBar}>
+          <View style={styles.searchContainer}>
+            <Ionicons name="search" size={18} color="#999" />
+            <TextInput
+              placeholder="Search"
+              placeholderTextColor="#999"
+              style={styles.searchInput}
+            />
+          </View>
+
+          <TouchableOpacity style={styles.iconButton}>
+            <BookBookmark  size={20} color="#333" weight="light" />
+          </TouchableOpacity>
+
+          
+        </View> */}
+
+        {/* --- Greeting --- */}
+        <View style={styles.header}>
+          <Text style={styles.greeting}>
+            What will you read, Sochi-K
+          </Text>
+          <Text style={styles.subText}>We have some fantastic books for you.</Text>
         </View>
 
-        <TouchableOpacity style={styles.iconButton}>
-          <Ionicons name="book-outline" size={20} color="#333" />
-        </TouchableOpacity>
-
-        {/* <Image
-          source={require("../../assets/images/avatar.jpeg")}
-          style={styles.avatar}
-        /> */}
-      </View>
-
-      {/* --- Greeting --- */}
-      <View style={styles.header}>
-        <Text style={styles.greeting}>
-          What will you read, Sochima
-        </Text>
-        <Text style={styles.subText}>We have some fantastic books for you.</Text>
-      </View>
-
-      {/* --- Book Carousel --- */}
-      <FlatList
-        data={books}
-        keyExtractor={(item) => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 16 }}
-        renderItem={({ item }) => (
-          <View style={styles.bookCard}>
-            <Image source={item.cover} style={styles.bookCover} />
-          </View>
-        )}
-      />
-
-
-      <View style={styles.readingNowHead}>
-        <Text style={styles.readingNow}>Reading Now</Text>
-        <Ionicons name="arrow-forward" size={20} color="#666" />
-      </View>
-      
-      <View style={styles.readingCard}>
-        <Image
-          source={require("../../assets/images/handmaid.jpg")}
-          style={styles.readingCover}
+        {/* --- Book Carousel --- */}
+        <FlatList 
+          data={books}
+          keyExtractor={(item) => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ paddingHorizontal: 16 }}
+          renderItem={({ item }) => (
+            <TouchableOpacity 
+              style={styles.bookCard} 
+              onPress={() => router.push("/screens/bookDetailScreen")}  // 👈 navigate to BookDetail
+            >
+              <Image source={item.cover} style={styles.bookCover} />
+            </TouchableOpacity>
+          )}
         />
 
-        <View style={styles.readingInfo}>
-          <Text style={styles.bookTitle}>The Handmaid’s Tale</Text>
-          <Text style={styles.bookAuthor}>Margaret Atwood</Text>
 
-          <Text style={styles.rating}>★★★☆☆</Text>
 
-          <View style={styles.progressBar}>
-            <View style={styles.progressFill} />
+        <View style={styles.readingNowHead}>
+          <Text style={styles.readingNow}>Reading Now</Text>
+          <Ionicons name="arrow-forward" size={20} color="#666" />
+        </View>
+        
+        <View style={styles.readingCard}>
+          <Image
+            source={require("../../assets/images/handmaid.jpg")}
+            style={styles.readingCover}
+          />
+
+          <View style={styles.readingInfo}>
+            <Text style={styles.bookTitle}>The Handmaid’s Tale</Text>
+            <Text style={styles.bookAuthor}>Margaret Atwood</Text>
+
+            <Text style={styles.rating}>★★★☆☆</Text>
+
+            <View style={styles.progressBar}>
+              <View style={styles.progressFill} />
+            </View>
+            <Text style={styles.progressText}>23 / 45</Text>
           </View>
-          <Text style={styles.progressText}>23 / 45</Text>
+
+          <Ionicons name="ellipsis-horizontal" size={20} color="#666" />
         </View>
 
-        <Ionicons name="ellipsis-horizontal" size={20} color="#666" />
-      </View>
 
-
-      <View style={styles.header}>
-        <Text style={styles.greeting}>
-          Latest Author Posts
-        </Text>
-      </View>
-      {/* --- Post Section (Instagram-style) --- */}
-      <View style={styles.postCard}>
-        <ScrollView
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          style={styles.carousel}
-        >
-          {[1, 2, 3].map((i) => (
-            <Image
-              key={i}
-              source={{ uri: `https://picsum.photos/600/400?random=${i}` }}
-              style={styles.postImage}
-            />
-          ))}
-        </ScrollView>
-
-        <Text style={styles.postTitle}>✨ New Release: "Dreaming in JS"</Text>
-
-        <View style={styles.postActions}>
-          <TouchableOpacity>
-            <Ionicons name="heart-outline" size={24} color="#FF6B6B" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setCommentsVisible(true)}>
-            <Ionicons name="chatbubble-outline" size={24} color="#555" />
-          </TouchableOpacity>
+        <View style={styles.header}>
+          <Text style={styles.greeting}>
+            Latest Author Posts
+          </Text>
         </View>
-      </View>
+        {/* --- Post Section (Instagram-style) --- */}
+        <View style={styles.postCard}>
+          <ScrollView
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            style={styles.carousel}
+          >
+            {[1, 2, 3].map((i) => (
+              <Image
+                key={i}
+                source={{ uri: `https://picsum.photos/600/400?random=${i}` }}
+                style={styles.postImage}
+              />
+            ))}
+          </ScrollView>
 
-      {/* Comments Modal */}
-      <Modal
-        visible={commentsVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setCommentsVisible(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Comments</Text>
-            <View style={styles.comment}>
-              <Text style={styles.commentAuthor}>Alice:</Text>
-              <Text style={styles.commentText}>Loved this book!</Text>
-            </View>
-            <View style={styles.reply}>
-              <Text style={styles.commentAuthor}>Dan:</Text>
-              <Text style={styles.commentText}>Same here 🔥</Text>
-            </View>
+          <Text style={styles.postTitle}>✨ New Release: "Dreaming in JS"</Text>
 
-            <TouchableOpacity
-              style={styles.closeBtn}
-              onPress={() => setCommentsVisible(false)}
-            >
-              <Text style={{ color: "#fff" }}>Close</Text>
+          <View style={styles.postActions}>
+            <TouchableOpacity>
+              <Ionicons name="heart-outline" size={24} color="#FF6B6B" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setCommentsVisible(true)}>
+              <Ionicons name="chatbubble-outline" size={24} color="#555" />
             </TouchableOpacity>
           </View>
         </View>
-      </Modal>
 
-      {/* --- Poll Section --- */}
-      <View style={styles.pollCard}>
-        <Image
-          source={{ uri: "https://picsum.photos/400/200" }}
-          style={styles.pollImage}
-        />
-        <Text style={styles.pollTitle}>📖 Which genre should I write next?</Text>
-        <TouchableOpacity style={styles.pollOption}>
-          <Text>Fantasy</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.pollOption}>
-          <Text>Romance</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.pollOption}>
-          <Text>Sci-Fi</Text>
-        </TouchableOpacity>
-      </View>
+        {/* Comments Modal */}
+        <Modal
+          visible={commentsVisible}
+          animationType="slide"
+          transparent={true}
+          onRequestClose={() => setCommentsVisible(false)}
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Comments</Text>
+              <View style={styles.comment}>
+                <Text style={styles.commentAuthor}>Alice:</Text>
+                <Text style={styles.commentText}>Loved this book!</Text>
+              </View>
+              <View style={styles.reply}>
+                <Text style={styles.commentAuthor}>Dan:</Text>
+                <Text style={styles.commentText}>Same here 🔥</Text>
+              </View>
 
-      {/* --- Reading Now --- */}
-      
-    </ScrollView>
+              <TouchableOpacity
+                style={styles.closeBtn}
+                onPress={() => setCommentsVisible(false)}
+              >
+                <Text style={{ color: "#fff" }}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+
+        {/* --- Poll Section --- */}
+        <View style={styles.pollCard}>
+          <Image
+            source={{ uri: "https://picsum.photos/400/200" }}
+            style={styles.pollImage}
+          />
+          <Text style={styles.pollTitle}>📖 Which genre should I write next?</Text>
+          <TouchableOpacity style={styles.pollOption}>
+            <Text>Fantasy</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.pollOption}>
+            <Text>Romance</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.pollOption}>
+            <Text>Sci-Fi</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* --- Reading Now --- */}
+        
+      </ScrollView>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fafafa", paddingTop: 10 },
+  gradientBg: { flex: 1 },
+  container: { flex: 1, paddingTop: 40 },
   topBar: { flexDirection: "row", alignItems: "center", paddingHorizontal: 16, marginBottom: 20 },
   searchContainer: {
     flexDirection: "row", alignItems: "center", backgroundColor: "#fff",
@@ -208,7 +222,15 @@ const styles = StyleSheet.create({
     shadowColor: "rgb(138, 138, 138)", shadowOpacity: 0.05, shadowRadius: 4, elevation: 2,
   },
   searchInput: { marginLeft: 6, flex: 1, fontSize: 14, color: "#333" },
-  iconButton: { backgroundColor: "#fff", padding: 8, borderRadius: 10, marginRight: 12 },
+  iconButton: {
+    backgroundColor: "#fff",
+    padding: 9,
+    borderRadius: 10,
+    shadowColor: "rgb(138, 138, 138)",
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
   avatar: { width: 36, height: 36, borderRadius: 18 },
   header: { paddingHorizontal: 16, marginBottom: 20 },
   greeting: { fontSize: 20, fontWeight: "700", color: "#222" },

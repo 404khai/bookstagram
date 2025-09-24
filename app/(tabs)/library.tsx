@@ -8,7 +8,10 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import { router } from "expo-router";
+import { BookBookmark  } from "phosphor-react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
 const sampleBooks = [
   {
@@ -39,54 +42,63 @@ export default function Library() {
   );
 
   return (
-    <View style={styles.container}>
-      {/* --- Top Bar --- */}
-      <View style={styles.topBar}>
-        <View style={styles.searchContainer}>
-          <Ionicons name="search" size={18} color="#999" />
-          <TextInput
-            placeholder="Search your library"
-            placeholderTextColor="#999"
-            style={styles.searchInput}
-            value={search}
-            onChangeText={setSearch}
-          />
+    <LinearGradient
+      colors={["#fafafa", "#ffeaea"]} 
+      style={styles.gradientBg}
+    >
+      <View style={styles.container}>
+        {/* --- Top Bar --- */}
+        <View style={styles.topBar}>
+          <View style={styles.searchContainer}>
+            <Ionicons name="search" size={18} color="#999" />
+            <TextInput
+              placeholder="Search your library"
+              placeholderTextColor="#999"
+              style={styles.searchInput}
+              value={search}
+              onChangeText={setSearch}
+            />
+          </View>
+
+          <TouchableOpacity style={styles.iconButton}>
+            <BookBookmark  size={20} color="#333" weight="light" />
+          </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.iconButton}>
-          <Ionicons name="book-outline" size={20} color="#FF6B6B" />
-        </TouchableOpacity>
-      </View>
-
-      {/* --- Books List --- */}
-      <FlatList
-        data={filteredBooks}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{ paddingBottom: 100 }}
-        renderItem={({ item }) => (
-          <View style={styles.bookCard}>
-            <Image source={{ uri: item.cover }} style={styles.bookCover} />
-            <View style={{ flex: 1 }}>
-              <Text style={styles.bookTitle}>{item.title}</Text>
-              <Text style={styles.bookAuthor}>{item.author}</Text>
-              <Text style={styles.rating}>★★★☆☆</Text>
-              <View style={styles.progressBar}>
-                <View style={styles.progressFill} />
+        {/* --- Books List --- */}
+        <FlatList
+          data={filteredBooks}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={{ paddingBottom: 100 }}
+          renderItem={({ item }) => (
+            <TouchableOpacity 
+              style={styles.bookCard} 
+              onPress={() => router.push("/screens/bookDetailScreen")}  // 👈 same thing here
+            >
+              <Image source={{ uri: item.cover }} style={styles.bookCover} />
+              <View style={{ flex: 1 }}>
+                <Text style={styles.bookTitle}>{item.title}</Text>
+                <Text style={styles.bookAuthor}>{item.author}</Text>
+                <Text style={styles.rating}>★★★☆☆</Text>
+                <View style={styles.progressBar}>
+                  <View style={styles.progressFill} />
+                </View>
+                <Text style={styles.progressText}>23 / 45</Text>          
               </View>
-              <Text style={styles.progressText}>23 / 45</Text>          
-            </View>
-            <Ionicons name="chevron-forward" size={20} color="#aaa" />
-          </View>
-        )}
-      />
-    </View>
+              <Ionicons name="chevron-forward" size={20} color="#aaa" />
+            </TouchableOpacity>
+          )}
+        />
+
+      </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  gradientBg: { flex: 1 },
   container: {
     flex: 1,
-    backgroundColor: "#fafafa",
     paddingTop: 10,
   },
   topBar: {
@@ -104,7 +116,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     marginRight: 12,
-    shadowColor: "#000",
+    shadowColor: "rgb(138, 138, 138)",
     shadowOpacity: 0.05,
     shadowRadius: 4,
     elevation: 2,
@@ -117,9 +129,9 @@ const styles = StyleSheet.create({
   },
   iconButton: {
     backgroundColor: "#fff",
-    padding: 8,
+    padding: 9,
     borderRadius: 10,
-    shadowColor: "#000",
+    shadowColor: "rgb(138, 138, 138)",
     shadowOpacity: 0.05,
     shadowRadius: 4,
     elevation: 2,

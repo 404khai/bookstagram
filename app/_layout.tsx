@@ -29,6 +29,7 @@ export default function RootLayout() {
 
         {/* Settings screen */}
         <Stack.Screen name="screens/settings" options={{ title: 'Settings' }} />
+        <Stack.Screen name="screens/bookDetailScreen" options={{ title: 'Book Details' }} />
 
         {/* Modal example */}
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
