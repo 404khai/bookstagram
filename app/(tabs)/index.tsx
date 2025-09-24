@@ -128,8 +128,8 @@ export default function HomeScreen() {
         </View>
 
 
-        <View style={styles.header}>
-          <Text style={styles.greeting}>
+        <View style={styles.header2}>
+          <Text style={styles.readingNow}>
             Latest Author Posts
           </Text>
         </View>
@@ -150,18 +150,69 @@ export default function HomeScreen() {
             ))}
           </ScrollView>
 
-          <Text style={styles.postTitle}>✨ New Release: "Dreaming in JS"</Text>
-
-          <View style={styles.postActions}>
-            <TouchableOpacity>
-              <Ionicons name="heart-outline" size={24} color="#FF6B6B" />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setCommentsVisible(true)}>
-              <Ionicons name="chatbubble-outline" size={24} color="#555" />
-            </TouchableOpacity>
+            <View style={styles.postContent}>
+              <Text style={styles.postTitle}>Excerpt from "Lost Pages"</Text>
+              <Text style={styles.postAuthor}>by Jonathan Hale</Text>
+              <Text style={styles.postText}>
+                "And in the silence, I found my voice..."
+              </Text>
+              <View style={styles.postActions}>
+                <Ionicons
+                  name="heart-outline"
+                  size={20}
+                  color="#FF6B6B"
+                  style={{ marginRight: 12 }}
+                />
+                <Ionicons
+                  name="chatbubble-outline"
+                  size={20}
+                  color="#333"
+                  style={{ marginRight: 12 }}
+                />
+                <Ionicons name="bookmark-outline" size={20} color="#333" />
+              </View>
+            </View>
           </View>
-        </View>
+        
+          <View style={styles.postCard}>
+          <ScrollView
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            style={styles.carousel}
+          >
+            {[1, 2, 3].map((i) => (
+              <Image
+                key={i}
+                source={{ uri: `https://picsum.photos/600/400?random=${i}` }}
+                style={styles.postImage}
+              />
+            ))}
+          </ScrollView>
 
+            <View style={styles.postContent}>
+              <Text style={styles.postTitle}>Excerpt from "Lost Pages"</Text>
+              <Text style={styles.postAuthor}>by Jonathan Hale</Text>
+              <Text style={styles.postText}>
+                "And in the silence, I found my voice..."
+              </Text>
+              <View style={styles.postActions}>
+                <Ionicons
+                  name="heart-outline"
+                  size={20}
+                  color="#FF6B6B"
+                  style={{ marginRight: 12 }}
+                />
+                <Ionicons
+                  name="chatbubble-outline"
+                  size={20}
+                  color="#333"
+                  style={{ marginRight: 12 }}
+                />
+                <Ionicons name="bookmark-outline" size={20} color="#333" />
+              </View>
+            </View>
+          </View>
         {/* Comments Modal */}
         <Modal
           visible={commentsVisible}
@@ -192,7 +243,7 @@ export default function HomeScreen() {
         </Modal>
 
         {/* --- Poll Section --- */}
-        <View style={styles.pollCard}>
+        {/* <View style={styles.pollCard}>
           <Image
             source={{ uri: "https://picsum.photos/400/200" }}
             style={styles.pollImage}
@@ -207,7 +258,7 @@ export default function HomeScreen() {
           <TouchableOpacity style={styles.pollOption}>
             <Text>Sci-Fi</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         {/* --- Reading Now --- */}
         
@@ -218,7 +269,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   gradientBg: { flex: 1 },
-  container: { flex: 1, paddingTop: 40 },
+  container: { flex: 1, paddingTop: 20 },
   topBar: { flexDirection: "row", alignItems: "center", paddingHorizontal: 16, marginBottom: 20 },
   searchContainer: {
     flexDirection: "row", alignItems: "center", backgroundColor: "#fff",
@@ -237,6 +288,7 @@ const styles = StyleSheet.create({
   },
   avatar: { width: 36, height: 36, borderRadius: 18 },
   header: { paddingHorizontal: 16, marginBottom: 20 },
+  header2: { paddingHorizontal: 16, marginTop: 10 },
   greeting: { fontSize: 20, fontWeight: "700", color: "#222" },
   subText: { fontSize: 14, color: "#777", marginTop: 4 },
   bookCard: { marginRight: 16 },
@@ -249,8 +301,11 @@ const styles = StyleSheet.create({
   },
   carousel: { width: "100%", height: 200 },
   postImage: { width: width - 32, height: 200, borderTopLeftRadius: 14, borderTopRightRadius: 14 },
-  postTitle: { margin: 12, fontSize: 16, fontWeight: "600", color: "#111" },
-  postActions: { flexDirection: "row", marginLeft: 12, gap: 16 },
+  postContent: { padding: 12 },
+  postTitle: { fontSize: 15, fontWeight: "700", color: "#111" },
+  postAuthor: { fontSize: 13, color: "#777", marginVertical: 4 },
+  postText: { fontSize: 14, color: "#444", marginBottom: 10 },
+  postActions: { flexDirection: "row", marginTop: 6 },
 
   /* Modal */
   modalOverlay: {
