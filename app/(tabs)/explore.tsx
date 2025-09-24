@@ -1,112 +1,190 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from "react-native";
+import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
 
-import { Collapsible } from '@/components/ui/collapsible';
-import { ExternalLink } from '@/components/external-link';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Fonts } from '@/constants/theme';
+export default function ExploreScreen() {
+  const categories = ["Fiction", "Poetry", "Non-Fiction", "Sci-Fi", "Romance"];
 
-export default function TabTwoScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
+    <ScrollView style={styles.container}>
+      {/* 🔍 Search Bar */}
+      <View style={styles.searchContainer}>
+        <Ionicons name="search" size={20} color="#999" />
+        <TextInput
+          placeholder="Search authors, books, or posts..."
+          placeholderTextColor="#999"
+          style={styles.searchInput}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type="title"
-          style={{
-            fontFamily: Fonts.rounded,
-          }}>
-          Explore
-        </ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
+      </View>
+
+      {/* 📚 Categories */}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.categoryScroll}
+      >
+        {categories.map((cat, idx) => (
+          <TouchableOpacity key={idx} style={styles.categoryChip}>
+            <Text style={styles.categoryText}>{cat}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+
+      {/* ✨ Author Spotlight */}
+      <View style={styles.authorCard}>
         <Image
-          source={require('@/assets/images/react-logo.png')}
-          style={{ width: 100, height: 100, alignSelf: 'center' }}
+          source={{ uri: "https://i.pravatar.cc/150?img=12" }}
+          style={styles.authorImage}
         />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful{' '}
-          <ThemedText type="defaultSemiBold" style={{ fontFamily: Fonts.mono }}>
-            react-native-reanimated
-          </ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+        <View style={{ flex: 1, marginLeft: 12 }}>
+          <Text style={styles.authorName}>Amanda Leigh</Text>
+          <Text style={styles.authorBio}>
+            Award-winning poet. Exploring love, loss, and growth 🌿
+          </Text>
+          <TouchableOpacity style={styles.followBtn}>
+            <Text style={styles.followText}>Follow</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* 🔥 Trending Post */}
+      <View style={styles.postCard}>
+        <Image
+          source={{ uri: "https://images.unsplash.com/photo-1512820790803-83ca734da794" }}
+          style={styles.postImage}
+        />
+        <View style={styles.postContent}>
+          <Text style={styles.postTitle}>Excerpt from "Lost Pages"</Text>
+          <Text style={styles.postAuthor}>by Jonathan Hale</Text>
+          <Text style={styles.postText}>
+            "And in the silence, I found my voice, echoing between the walls of forgotten stories..."
+          </Text>
+          <View style={styles.postActions}>
+            <TouchableOpacity style={styles.actionBtn}>
+              <Ionicons name="heart-outline" size={20} color="#FF6B6B" />
+              <Text style={styles.actionText}>Like</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.actionBtn}>
+              <Ionicons name="chatbubble-outline" size={20} color="#333" />
+              <Text style={styles.actionText}>Comment</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.actionBtn}>
+              <FontAwesome6 name="bookmark" size={18} color="#333" />
+              <Text style={styles.actionText}>Save</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+
+      {/* 📊 Poll Section */}
+      <View style={styles.pollCard}>
+        <Text style={styles.pollQuestion}>
+          Which genre inspires you the most?
+        </Text>
+        {["Fiction", "Poetry", "Sci-Fi", "Non-Fiction"].map((option, i) => (
+          <TouchableOpacity key={i} style={styles.pollOption}>
+            <Text style={styles.pollText}>{option}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: { flex: 1, backgroundColor: "#fafafa", padding: 16 },
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    paddingHorizontal: 10,
+    height: 40,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+  searchInput: { marginLeft: 6, flex: 1, fontSize: 14, color: "#333" },
+  categoryScroll: { marginBottom: 20 },
+  categoryChip: {
+    backgroundColor: "#fff",
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    marginRight: 10,
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 2,
   },
+  categoryText: { fontSize: 14, color: "#333", fontWeight: "600" },
+  authorCard: {
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    padding: 16,
+    borderRadius: 14,
+    marginBottom: 20,
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  authorImage: { width: 60, height: 60, borderRadius: 30 },
+  authorName: { fontSize: 16, fontWeight: "700", color: "#222" },
+  authorBio: { fontSize: 13, color: "#666", marginVertical: 6 },
+  followBtn: {
+    backgroundColor: "#FF6B6B",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+    alignSelf: "flex-start",
+  },
+  followText: { color: "#fff", fontSize: 13, fontWeight: "600" },
+  postCard: {
+    backgroundColor: "#fff",
+    borderRadius: 14,
+    marginBottom: 20,
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowRadius: 5,
+    elevation: 2,
+  },
+  postImage: { width: "100%", height: 180 },
+  postContent: { padding: 12 },
+  postTitle: { fontSize: 15, fontWeight: "700", color: "#111" },
+  postAuthor: { fontSize: 13, color: "#777", marginVertical: 4 },
+  postText: { fontSize: 14, color: "#444", marginBottom: 10 },
+  postActions: { flexDirection: "row", marginTop: 6 },
+  actionBtn: { flexDirection: "row", alignItems: "center", marginRight: 16 },
+  actionText: { marginLeft: 4, fontSize: 13, color: "#555" },
+  pollCard: {
+    backgroundColor: "#fff",
+    borderRadius: 14,
+    padding: 16,
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+    marginBottom: 30,
+  },
+  pollQuestion: { fontSize: 15, fontWeight: "600", marginBottom: 12 },
+  pollOption: {
+    backgroundColor: "#f7f7f7",
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginBottom: 8,
+    paddingHorizontal: 12,
+  },
+  pollText: { fontSize: 14, color: "#333" },
 });

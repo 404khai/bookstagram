@@ -28,8 +28,8 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
         {/* Settings screen */}
-        <Stack.Screen name="screens/settings" options={{ title: 'Settings' }} />
-        <Stack.Screen name="screens/bookDetailScreen" options={{ title: 'Book Details' }} />
+        <Stack.Screen name="screens/settings" options={{ headerShown: false }} />
+        <Stack.Screen name="screens/bookDetailScreen" options={{headerShown: false}} />
 
         {/* Modal example */}
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />

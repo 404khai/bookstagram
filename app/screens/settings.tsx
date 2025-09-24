@@ -13,6 +13,7 @@ import {
   Entypo,
 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import CustomHeader from "../components/CustomHeader";
 
 export default function SettingsScreen() {
   const navigation = useNavigation();
@@ -83,7 +84,7 @@ export default function SettingsScreen() {
   return (
     <ScrollView style={styles.container}>
       {/* <Text style={styles.header}>Settings</Text> */}
-
+      <CustomHeader title="Settings" />
       {settingsOptions.map((item, index) => (
         <TouchableOpacity
           key={index}
