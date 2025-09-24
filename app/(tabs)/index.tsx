@@ -47,8 +47,12 @@ export default function HomeScreen() {
     //   colors={["#fafafa", "#fff7e6"]} 
     //   style={styles.gradientBg}
     // >
+    // <LinearGradient
+    //   colors={["#fafafa", "#ffeaea"]} 
+    //   style={styles.gradientBg}
+    // >
     <LinearGradient
-      colors={["#fafafa", "#ffeaea"]} 
+      colors={["#fafafa", "#fff5ec"]} 
       style={styles.gradientBg}
     >
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>

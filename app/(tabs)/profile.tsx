@@ -82,7 +82,7 @@ export default function ProfileScreen() {
               style={styles.headerImage}
             />
             <LinearGradient
-                colors={["transparent", "rgba(223, 223, 223, 0.79)", "#fff"]}
+                colors={["transparent", "rgba(223, 223, 223, 0.79)", "#fafafa"]}
                 style={styles.headerOverlay}
             />
             {/* <View style={styles.blackOverlay} /> */}
