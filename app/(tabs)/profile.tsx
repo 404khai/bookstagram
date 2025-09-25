@@ -68,7 +68,7 @@ export default function ProfileScreen() {
 
   return (
     <LinearGradient
-      colors={["#fafafa", "#ffeaea"]} 
+      colors={["#fafafa", "#fff5ec"]} 
       style={styles.gradientBg}
     >
       <View style={styles.container}>

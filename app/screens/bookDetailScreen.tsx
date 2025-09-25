@@ -93,7 +93,7 @@ export default function BookDetailScreen() {
               </View>
 
               <Ionicons
-                name="chevron-forward-outline"
+                name="lock-closed-outline"
                 size={20}
                 color="#777"
               />
